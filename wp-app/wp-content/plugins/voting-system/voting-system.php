@@ -82,7 +82,7 @@ function submit_vote() {
         // Calculate the new voting results
         $percentages = calculate_voting_results( $post_id );
 
-        wp_send_json_success( $percentages );
+        wp_send_json_success( array('message' => 'Thank you for your vote!', 'results' => $percentages ));
     }
 
     wp_die();
@@ -125,7 +125,7 @@ function add_voting_buttons( $content ) {
         
 
         $content .= '<div class="voting-buttons">';
-        $content .= '<div class="article-helpful" data-post-id="' . $post_id . '">WAS THIS ARTICLE HELPFUL?<br><button class="vote-button" data-vote="1">YES</button>';
+        $content .= '<div class="article-helpful vote-message" data-post-id="' . $post_id . '">WAS THIS ARTICLE HELPFUL?<br><button class="vote-button" data-vote="1">YES</button>';
         $content .= '<button class="vote-button" data-vote="0">NO</button></div>';
         $content .= '<div class="article-helpful">THANK YOU FOR YOUR FEEDBACK! ';
         $content .= '<div class="borderYes"><span class="happysmily"></span><span class="datatarget1">' . $percentages['yes'] .'%</span></div><div class="border"><span class="sadsmily"></span><span class="datatarget2">' . $percentages['no'] . '%</span></div>';

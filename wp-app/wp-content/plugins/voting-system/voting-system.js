@@ -23,8 +23,10 @@ jQuery(document).ready(function ($) {
             .siblings(".article-helpful")
             .find(".datatarget2");
 
-          resultsYes.text(response.data.yes + "%");
-          resultsNo.text(response.data.no + "%");
+          resultsYes.text(response.data.results.yes + "%");
+          resultsNo.text(response.data.results.no + "%");
+          var messages = button.parent();
+          messages.text(response.data.message);
         } else {
           // There was an error
           button.parent().text(response.data);
