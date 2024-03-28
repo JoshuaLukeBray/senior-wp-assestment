@@ -1,7 +1,7 @@
-In order to use this plugin drop the plugin in the plugins directory within wordpress. 
-Once done so activate the plugin. 
+In order to use this plugin activate it from the plugins section in wp.  
 Once activated it will show at the bottom of each single article and give the user the ability to vote on the article. 
-The plugin checks the ip and if the already voted will not allow a vote. 
+Create a post from posts in wp backend in order to test.
+The plugin checks the ip and if the already voted will not allow a vote. You can comment out code in voting-system.php in order to test. It is commented in the file. 
 To turn off the plugin deactivate it. 
-There is a setting page under settings in wordpress backend but actual defined settings were outside the scope of the task. The plugin needs to be activated in order to see the settings in wp settings. 
+There is a settings page under settings in wordpress backend but actual defined settings were outside the scope of the task. The plugin needs to be activated in order to see the settings in wp settings. 
 
