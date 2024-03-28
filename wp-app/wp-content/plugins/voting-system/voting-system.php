@@ -179,7 +179,7 @@ class VotingSystemPlugin {
     }
 
     public function render_voting_results_meta_box( $post ) {
-        $percentage = $this->calculate_voting_results( $post->ID );
+        $percentages = $this->calculate_voting_results( $post->ID );
 
         echo '<p>' . $percentages['yes'] . '% of people voted yes.</p>';
         echo '<p>' . $percentages['no'] . '% of people voted no.</p>';
