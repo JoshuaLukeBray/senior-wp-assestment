@@ -1,5 +1,5 @@
 In order to use this plugin activate it from the plugins section in wp.  
-Once activated it will show at the bottom of each single article and give the user the ability to vote on the article. 
+Once activated it will show at the bottom of each single article and give the user the ability to vote on the article. The plugin is responsive. 
 Create a post from posts in wp backend in order to test.
 The plugin checks the ip and if the already voted will not allow a vote. You can comment out code in voting-system.php in order to test. It is commented in the file. 
 To turn off the plugin deactivate it. 
