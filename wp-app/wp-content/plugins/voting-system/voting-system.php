@@ -12,6 +12,7 @@ defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
 register_activation_hook( __FILE__, 'create_voting_table' );
 
+//create table to store votes and IPs
 function create_voting_table() {
     global $wpdb;
 
@@ -32,6 +33,7 @@ function create_voting_table() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_voting_scripts' );
 
+//get the scripts ready for jquery AJAX
 function enqueue_voting_scripts() {
     wp_enqueue_script( 'voting-system', plugins_url( '/voting-system.js', __FILE__ ), array( 'jquery' ), '1.0', true );
     wp_localize_script( 'voting-system', 'voting_system', array(
@@ -41,6 +43,7 @@ function enqueue_voting_scripts() {
 
 add_action( 'wp_enqueue_scripts', 'enqueue_voting_styles' );
 
+//get styles ready for the CSS
 function enqueue_voting_styles() {
     wp_enqueue_style( 'voting-system', plugins_url( '/voting-system.css', __FILE__ ), array(), '1.0' );
 }
@@ -48,6 +51,7 @@ function enqueue_voting_styles() {
 add_action( 'wp_ajax_nopriv_submit_vote', 'submit_vote' );
 add_action( 'wp_ajax_submit_vote', 'submit_vote' );
 
+//get vote from front end and deal with the data respsonses 
 function submit_vote() {
     global $wpdb;
 
@@ -87,7 +91,7 @@ function submit_vote() {
 
     wp_die();
 }
-
+//Calculate the voting results
 function calculate_voting_results( $post_id ) {
     global $wpdb;
 
@@ -118,6 +122,7 @@ function calculate_voting_results( $post_id ) {
 
 add_filter( 'the_content', 'add_voting_buttons' );
 
+//html to output in front end for voting buttons
 function add_voting_buttons( $content ) {
     if( is_single() ) {
         $post_id = get_the_ID();
@@ -141,6 +146,7 @@ function add_voting_buttons( $content ) {
 
 add_action( 'add_meta_boxes', 'add_voting_results_meta_box' );
 
+//display results for article in back end
 function add_voting_results_meta_box() {
     add_meta_box(
         'voting_results',
@@ -151,7 +157,7 @@ function add_voting_results_meta_box() {
         'high'
     );
 }
-
+ //render the results accordingly 
 function render_voting_results_meta_box( $post ) {
     $percentage = calculate_voting_results( $post->ID );
 
