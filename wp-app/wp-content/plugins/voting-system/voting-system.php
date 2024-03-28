@@ -10,6 +10,34 @@
 // Prevent direct file access
 defined( 'ABSPATH' ) or die( 'No script kiddies please!' );
 
+function joshplugin_menu() {
+    add_options_page(
+        'My Plugin Settings', // Page title
+        'Simple Voting Plugin Settings', // Menu title
+        'manage_options', // Capability
+        'joshplugin', // Menu slug
+        'joshplugin_settings_page' // Function to display the settings page
+    );
+}
+add_action('admin_menu', 'joshplugin_menu');
+
+function joshplugin_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1>READ ALL ABOUT IT</h1>
+        <p>Here you could have various configuration settings for the Simple Voting Plugin.</p>
+        <p>Once activated this plugin will appear at the bottom of each article.</p>
+        <p>A user can vote whether the article was helpful or not.</p>
+        <p>To turn off the plugin simply deactivate it from plugins.</p>       
+    </div>
+    <?php
+}
+
+function joshplugin_settings() {
+    register_setting('joshplugin-settings', 'my_setting');
+}
+add_action('admin_init', 'joshplugin_settings');
+
 register_activation_hook( __FILE__, 'create_voting_table' );
 
 //create table to store votes and IPs
@@ -61,6 +89,7 @@ function submit_vote() {
 
     $table_name = $wpdb->prefix . 'voting_system';
 
+    //REMOVE THIS CODE TO TEST THE VOTING SYSTEM
     // Check if the user has already voted
     $existing_vote = $wpdb->get_row( $wpdb->prepare(
         "SELECT * FROM $table_name WHERE post_id = %d AND ip_address = %s",
